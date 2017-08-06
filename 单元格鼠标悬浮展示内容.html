@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        td{
+    position:relative;
+    z-index:2; }
+td:hover{
+    z-index:3;
+    background:none; }
+td .tdtip  {
+    display: none; }
+td:hover .tdtip  {
+    display: block;
+    position: absolute;
+    top: 8px; 
+    background-color: whitesmoke;
+    color: royalblue;
+    word-break: break-all; 
+    overflow: scroll;
+    }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>项目介绍</th>
+                <th>产品说明</th>
+                <th>回款说明</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>aaaaaaaaaaaaa<span class="tdtip">popAddressaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span></td>
+                <td>bbbbbbbbbbb<span class="tdtip">popAddressbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb</span></td>
+                <td>cccccccccccccc<span class="tdtip">popAddresscccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc</span></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
