@@ -1,0 +1,36 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title></title>  
+</head>  
+<body>  
+<select id="select" onfocus="selectFocus()">  
+    <option onclick="selectClick()">同城 | cs4548789</option>  
+    <option onclick="selectClick()">哈哈哈 | 56666666666</option>  
+    <option onclick="selectClick()">啊我去 | 46544545</option>  
+    <option onclick="selectClick()">高温干旱 | 556899</option>  
+    <option onclick="selectClick()">会发生 | 564879</option>  
+    <option onclick="selectClick()">fdggdf |9898998</option>  
+    <option onclick="selectClick()">高温干旱 | 556899</option>  
+    <option onclick="selectClick()">会发生 | 564879</option>  
+    <option onclick="selectClick()">fdggdf |9898998</option>  
+    <option onclick="selectClick()">高温干旱 | 556899</option>  
+    <option onclick="selectClick()">会发生 | 564879</option>  
+    <option onclick="selectClick()">fdggdf |9898998</option>  
+    <option onclick="selectClick()">高温干旱 | 556899</option>  
+    <option onclick="selectClick()">会发生 | 564879</option>  
+    <option onclick="selectClick()">fdggdf |9898998</option>   
+</select>  
+  
+<script type="text/javascript">  
+    function selectFocus(){  
+        document.getElementById("select").setAttribute("size","5");  
+    }  
+    function selectClick(){  
+        document.getElementById("select").removeAttribute("size");  
+        document.getElementById("select").blur();  
+        this.setAttribute("selected","");  
+    }  
+</script>  
+</body>  
+</html>
