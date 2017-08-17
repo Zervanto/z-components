@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+<script>
+    // 协议名称List
+var nameList =[];
+// 产品模板代码
+var productMoudleCode = "";
+/**
+ * 校验上传文件的格式和大小
+ * @param file
+ */
+function check(file){
+	var fileSize=file.files[0].size;
+	if(file.value.indexOf(".html",0)=="-1"){
+		createPopup("文件格式错误！");
+		$("#fileArea").html("<input type='file' style='padding-left: 0;color: #000;' id='uploadFile' name='uploadFile' accept='.bmp,.png,.jpg,.jpeg,.gif' onchange='check(this)'>");
+		return;
+	}
+	if(fileSize>100000000){
+		createPopup("文件大小不能超过10MB！");
+		$("#fileArea").html("<input type='file' style='padding-left: 0;color: #000;' id='uploadFile' name='uploadFile' accept='.bmp,.png,.jpg,.jpeg,.gif' onchange='check(this)'>");
+		return;
+    }
+	var path = file.value;
+	var pos1 = path.lastIndexOf("\\");
+    var pos2 = path.lastIndexOf(".");
+    $('#uploadName').val(path.substring(pos1+1,pos2));
+}
+
+/*************************
+* 展示上传的协议文件
+* @param ：
+* @return：
+**************************
+*/
+function htmlUpload(){
+	var myfile=$("#inputfile").val();
+	if(myfile==""){
+		createPopup("请选择文件！");
+        return false;
+    }
+	if($("#uploadName").val()==""){
+		createPopup("请填写文件名称！");
+        return false;
+    }else if($("#uploadName").val().length>20){
+    	createPopup("文件名称不能超过20个字符！");
+    	return false;
+    }
+	
+	var flag = 0; // 标记是否重名
+	if(nameList != ""){
+		for(var y=0;y < nameList.length; y++){
+			var name = $("#uploadName").val();
+			if(name == nameList[y]){
+				flag = 1;
+			} 
+		}
+	}
+	
+	if(flag == 1){
+		createPopup("文件名称重复！请修改。");
+		return false;
+//		createPopupMethod(name+" 已存在，确定要覆盖吗？",uploadx,cancel);
+	} else {
+		uploadx();
+	}
+}
+
+/*************************
+* 协议文件的上传
+* @param ：
+* @return：
+**************************
+*/
+function uploadx() {
+	var xyData = {
+			"productMoudleCode" : productMoudleCode,
+			"fileName" : $("#uploadName").val()
+			};
+	$.ajaxFileUpload({
+        url:  base.domain +"productMoudle/uploadProductMoudleAgreement.do", //用于文件上传的服务器端请求地址
+        type : 'post',
+        async : false,
+        data: xyData,
+        secureuri: false, //是否需要安全协议，一般设置为false
+        fileElementId: "inputfile", //文件上传域的ID
+        dataType: 'json', //返回值类型 一般设置为json
+        success:function (data)  //服务器成功响应处理函数
+        {
+        	if(data.statusCode == "000000"){
+        		$('#agreement-model').modal("hide");
+        		$("#fileArea").html("<input type='file' id='inputfile' name='inputfile' accept='.html' onchange='check(this)'>");
+        		$('#inputfile').val("");
+        		$('#uploadName').val("");
+        		searchUpdateInfo(productMoudleCode);
+        		createPopup("协议上传成功");
+        	} else {
+            	createPopup(data.statusMessage);
+        	}
+        }
+	});
+}
+</script>
+    </body>
+</html>
