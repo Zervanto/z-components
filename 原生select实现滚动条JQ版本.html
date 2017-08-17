@@ -79,6 +79,9 @@
             console.log($("#select2").val());
             console.log($("#select3").val());
         });
+        $("select").on("blur",function(){	
+		    $(this).attr("size","").css("z-index","2");
+	    });
     });
     function selectFocus(obj){  
         $(obj).attr("size","5");  
